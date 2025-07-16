@@ -1,0 +1,36 @@
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.net.*;
+
+public class EchoClient {
+    public static final int serverPort = 7;
+
+    public static void main(String[] args) {
+        // declare variables first
+        String hostname = "localhost";
+        PrintWriter networkOut = null;
+        BufferedReader networkIn = null;
+        Socket s = null;
+        try {
+            s = new Socket(hostname, serverPort);
+            System.out.println("Connected to echo server");
+            networkIn = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            BufferedReader userIn = new BufferedReader(new InputStreamReader(System.in));
+            networkOut = new PrintWriter(s.getOutputStream());
+
+            // now do the real things:
+            while(true) {
+                String theLine = userIn.readLine();
+                if(theLine.equals(".")) break;
+                networkOut.flush();
+                System.out.println(network.readLine());
+            } // end while
+        } catch (IOException e) {
+            System.err.println(e);
+        } finally {
+            try {
+                if (s != null) s.close();
+            } catch (IOException e) {}d
+        }
+    }
+}
