@@ -1,0 +1,66 @@
+CREATE TABLE Available_Flavors_By_Brand (
+Brand VARCHAR(20),
+Flavor VARCHAR(20),
+PRIMARY KEY (Brand, FLAVOR)
+);
+
+CREATE TABLE Preferred_Brands_By_Person (
+Person VARCHAR(20),
+Brand VARCHAR(20),
+PRIMARY KEY (Person, Brand)
+);
+
+CREATE TABLE Preferred_Flavors_By_Person (
+Person VARCHAR(20),
+Flavor VARCHAR(20),
+PRIMARY KEY (Person, Flavor)
+);
+
+-- Daten für Available_Flavors_By_Brand
+INSERT INTO Available_Flavors_By_Brand (Brand, Flavor) VALUES
+('Frosty''s', 'Vanilla'),
+('Frosty''s', 'Strawberry'),
+('Frosty''s', 'Mint Chocolate Chip'),
+('Alpine', 'Vanilla'),
+('Alpine', 'Rum Raisin'),
+('Ice Queen', 'Vanilla'),
+('Ice Queen', 'Strawberry'),
+('Ice Queen', 'Mint Chocolate Chip');
+
+-- Daten für Preferred_Brands_By_Person
+INSERT INTO Preferred_Brands_By_Person (Person, Brand) VALUES
+('Jason', 'Frosty''s'),
+('Jason', 'Alpine'),
+('Suzy', 'Alpine'),
+('Suzy', 'Ice Queen');
+
+-- Daten für Preferred_Flavors_By_Person
+INSERT INTO Preferred_Flavors_By_Person (Person, Flavor) VALUES
+('Jason', 'Vanilla'),
+('Jason', 'Chocolate'),
+('Suzy', 'Rum Raisin'),
+('Suzy', 'Mint Chocolate Chip'),
+('Suzy', 'Strawberry');
+
+
+SELECT * FROM Available_Flavors_By_Brand;
+SELECT * FROM Preferred_Brands_By_Person;
+SELECT * FROM Preferred_Flavors_By_Person;
+
+SELECT pbrand.Person, bf.Brand, bf.Flavor FROM Preferred_Brands_By_Person AS pbrand
+JOIN Preferred_Flavors_By_Person pflavor
+ON
+pbrand.person = pflavor.person
+JOIN Available_Flavors_By_Brand AS bf
+ON 
+pbrand.Brand = bf.Brand
+AND pflavor.Flavor = bf.Flavor;
+
+
+
+
+
+
+
+
+
